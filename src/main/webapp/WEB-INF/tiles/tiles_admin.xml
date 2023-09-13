@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="/admin/gradeList" extends="baseLayout">
+		<put-attribute name="title" value="성적 리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/gradeList.jsp"/>
+	</definition>
+	
+	<definition name="/admin/studentForm" extends="baseLayout">
+		<put-attribute name="title" value="학생 등록창"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/studentForm.jsp"/>
+	</definition>
+	
+	<definition name="/admin/gradeForm" extends="baseLayout">
+		<put-attribute name="title" value="학생 성적 등록창"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/gradeForm.jsp"/>
+	</definition>
+	
+	<definition name="/admin/studentList" extends="baseLayout">
+		<put-attribute name="title" value="학생 상세 조회창"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/studentList.jsp"/>
+	</definition>
+
+	
+	
+</tiles-definitions>

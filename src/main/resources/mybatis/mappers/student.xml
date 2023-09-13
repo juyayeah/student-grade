@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.student.student.dao.StudentDAO">
+ 	<resultMap id="studentResult" type="studentVO">
+ 		<result property="id" column="id"/>
+ 		<result property="pwd" column="pwd"/>
+ 		<result property="name" column="name"/>
+ 		<result property="pic" column="pic"/>
+ 	</resultMap>
+ 	<resultMap id="gradeResult" type="gradeVO">
+ 		<result property="id" column="id"/>
+ 		<result property="kor" column="kor"/>
+ 		<result property="eng" column="eng"/>
+ 		<result property="math" column="math"/>
+ 		<result property="history" column="history"/>
+ 		<result property="sum" column="sum"/>
+ 		<result property="avg" column="avg"/>
+ 	</resultMap>
+ 
+ <select id="loginById" resultType="studentVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select * from student
+ 	where id=#{id} and pwd=#{pwd}
+ 	]]>
+ </select>
+ 
+ <select id="gradeList" resultType="gradeVO" parameterType="String">
+ 	select * from grade
+ 	where id=#{id}
+ </select>
+ 
+ <select id="gradeRank" parameterType="String" resultType="String">
+ 	<![CDATA[
+ 	select srank from (select rank() over(order by sum desc) as srank, id from grade) student_rank where id=#{id}
+ 	]]>
+ </select>
+ 
+ <select id="selectById" parameterType="String" resultType="studentVO">
+ 	<![CDATA[
+ 	select * from student where id=#{id}
+ 	]]>
+ </select>
+ 
+ <insert id="insertStudent" parameterType="studentVO">
+ 	<![CDATA[
+ 	insert into student(id, pwd, name, pic)
+ 	values(#{id}, #{pwd}, #{name}, #{pic})
+ 	]]>
+ </insert>
+ 
+ <insert id="insertGrade" parameterType="gradeVO" >
+ 	<![CDATA[
+ 	insert into grade(id, kor, eng, math, history, sum, avg)
+ 	values(#{id}, #{kor}, #{eng}, #{math}, #{history}, #{sum}, #{avg})
+ 	]]>
+ </insert>
+ 
+  <update id="updateStudent" parameterType="java.util.Map">
+ 	<![CDATA[
+ 		update student set
+ 		pwd=#{pwd}, name=#{name}
+ 		]]>
+ 			<if test="pic!='' and pic!=null">
+ 				<![CDATA[ ,pic=#{pic} ]]>
+ 			</if>
+ 		<![CDATA[
+ 		where id=#{id}
+ 	]]>
+ </update>
+ 
+ <update id="updateGrade" parameterType="gradeVO">
+ 	<![CDATA[
+ 	update grade set kor=#{kor}, eng=#{eng}, math=#{math}, history=#{history}, sum=#{sum}, avg=#{avg} where id=#{id}
+ 	]]>
+ </update>
+ </mapper>
